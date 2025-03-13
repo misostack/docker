@@ -1,0 +1,32 @@
+# Local Docker Containers For Developers
+
+```sh
+docker-compose -f docker-compose.yml -p "local" up -d
+```
+
+## Includes
+
+1. [x] postgres_16.6 - 5432
+2. [x] redis_7.2 - 6379
+3. [x] pgadmin latest version - 5050
+
+## Notes
+
+### Postgres
+
+```sh
+CREATE USER your_new_username WITH ENCRYPTED PASSWORD 'your_password';
+# if want super user
+ALTER USER your_new_username WITH SUPERUSER;
+GRANT ALL PRIVILEGES ON DATABASE your_database_name TO your_new_username;
+# verify
+SELECT * FROM pg_user WHERE usename = 'your_new_username';
+REVOKE CONNECT ON DATABASE postgres FROM restricted_user;
+REVOKE CONNECT ON DATABASE template1 FROM restricted_user;
+REVOKE CONNECT ON DATABASE template0 FROM restricted_user;
+GRANT CONNECT ON DATABASE allowed_db TO restricted_user;
+```
+
+## References
+
+- [Create User in Postgres](https://www.strongdm.com/blog/postgres-create-user)
