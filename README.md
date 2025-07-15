@@ -6,9 +6,19 @@ docker-compose -f docker-compose.yml -p "local" up -d
 
 ## Includes
 
-1. [x] postgres_16.6 - 5432
-2. [x] redis_7.2 - 6379
+1. [x] postgres_17.5 - 5432
+2. [x] redis_8.0.3 - 6379
 3. [x] pgadmin latest version - 5050
+
+## Docker Commands
+
+1. Create postgres db
+
+```sh
+docker exec -it postgres_local \
+  psql -U postgres -d postgres \
+  -c "CREATE DATABASE local OWNER postgres;"
+```
 
 ## Notes
 
