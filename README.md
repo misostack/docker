@@ -18,6 +18,10 @@ docker-compose -f docker-compose.yml -p "local" up -d
 docker exec -it postgres_local \
   psql -U postgres -d postgres \
   -c "CREATE DATABASE local OWNER postgres;"
+
+docker exec -it postgres_local \
+  psql -U postgres -d postgres \
+  -c "CREATE DATABASE snm_cms OWNER postgres;"
 ```
 
 ## Notes
