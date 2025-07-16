@@ -9,6 +9,8 @@ docker-compose -f docker-compose.yml -p "local" up -d
 1. [x] postgres_17.5 - 5432
 2. [x] redis_8.0.3 - 6379
 3. [x] pgadmin latest version - 5050
+4. [x] mysql:8.4.5 - 3306
+5. [x] mongo:8.0.11 - 27017
 
 ## Docker Commands
 

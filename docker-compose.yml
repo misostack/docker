@@ -8,8 +8,6 @@ services:
       - "5432:5432"
     volumes:
       - postgres_local_data:/var/lib/postgresql/data
-    networks:
-      - local
     env_file:
       - .env.docker
 
@@ -26,8 +24,6 @@ services:
     volumes:
       - pgadmin_local_data:/var/lib/pgadmin
       - ./pgadmin-backups:/pgadmin-backups
-    networks:
-      - local
     env_file:
       - .env.docker
 
@@ -39,8 +35,6 @@ services:
       - redis_local_data:/data
     ports:
       - "6379:6379"
-    networks:
-      - local
 
   mysql:
     image: mysql:8.4.5
@@ -53,6 +47,17 @@ services:
     volumes:
       - mysql_local_data:/var/lib/mysql
 
+  mongo:
+    image: mongo:8.0.11
+    container_name: mongo_local
+    restart: unless-stopped
+    env_file:
+      - .env.docker
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_local_data:/data/db
+
 networks:
   local:
 
@@ -61,3 +66,4 @@ volumes:
   redis_local_data:
   pgadmin_local_data:
   mysql_local_data:
+  mongo_local_data:
