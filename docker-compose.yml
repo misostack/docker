@@ -1,12 +1,13 @@
 services:
   postgres_local:
     container_name: postgres_local
-    image: postgres:17.5
+    image: pgvector/pgvector:pg17
     # shm_size: 1g
     restart: unless-stopped
     ports:
       - "5432:5432"
     volumes:
+      - ./.docker/docker-entrypoint-initdb.d/init_extensions.sql:/docker-entrypoint-initdb.d/init_extensions.sql:ro
       - postgres_local_data:/var/lib/postgresql/data
     env_file:
       - .env.docker
@@ -54,9 +55,20 @@ services:
     env_file:
       - .env.docker
     ports:
-      - "27017:27017"
+      - "27018:27018"
     volumes:
       - mongo_local_data:/data/db
+
+  mongo5:
+    image: mongo:5.0.31
+    container_name: mongo5_local
+    restart: unless-stopped
+    env_file:
+      - .env.docker
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo5_local_data:/data/db
 
 networks:
   local:
@@ -67,3 +79,4 @@ volumes:
   pgadmin_local_data:
   mysql_local_data:
   mongo_local_data:
+  mongo5_local_data:
